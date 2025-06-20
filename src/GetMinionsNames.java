@@ -15,18 +15,34 @@ public class GetMinionsNames {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         if (resultSet.next()) {
-            String minionName = resultSet.getString("name");
-            int minionAge = resultSet.getInt("age");
-            System.out.printf("%s %d%n", minionName, minionAge);
-            while (resultSet.next()) {
-                minionName = resultSet.getString("name");
-                minionAge = resultSet.getInt("age");
-                System.out.printf("%s %d%n", minionName, minionAge);
-            }
+            printVillain(connection, villainId);
+            printMinions(resultSet);
         } else {
             System.out.println("No villain with ID " + villainId + " exists in the database.");
         }
 
+    }
 
+    private static void printMinions(ResultSet resultSet) throws SQLException {
+        String minionName = resultSet.getString("name");
+        int minionAge = resultSet.getInt("age");
+        System.out.printf("%s %d%n", minionName, minionAge);
+        while (resultSet.next()) {
+            minionName = resultSet.getString("name");
+            minionAge = resultSet.getInt("age");
+            System.out.printf("%s %d%n", minionName, minionAge);
+        }
+    }
+
+    private static void printVillain(Connection connection, int villainID) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM villains WHERE id = ?;");
+        statement.setInt(1, villainID);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            String villainName = resultSet.getString("name");
+            System.out.printf("Villain: %s%n", villainName);
+        } else {
+            System.out.println("No villain with ID " + villainID + " exists in the database.");
+        }
     }
 }
