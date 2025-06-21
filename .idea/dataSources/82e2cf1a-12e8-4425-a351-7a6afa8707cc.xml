@@ -1081,7 +1081,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <schema id="302" parent="1" name="minions_db">
       <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <LastIntrospectionLevel>3</LastIntrospectionLevel>
-      <LastIntrospectionLocalTimestamp>2025-06-20.12:55:46</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-06-21.12:05:50</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="303" parent="1" name="mountains">
