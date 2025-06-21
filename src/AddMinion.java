@@ -15,7 +15,7 @@ public class AddMinion {
         String villainName = tokens[1];
         addVillain(connection, villainName);
         addMinion(connection, minionName, minionAge, townName);
-
+        connectMinionToVillain(connection, minionName, villainName);
     }
 
     private static void addMinion(Connection connection, String minionName, int minionAge, String townName) throws SQLException {
@@ -60,5 +60,11 @@ public class AddMinion {
         System.out.printf("Villain %s was added to the database.%n", villainName);
     }
 
-
+    private static void connectMinionToVillain(Connection connection, String minionName, String villainName) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("""
+                INSERT INTO minions_villains (minion_id, villain_id)
+                VALUES ((SELECT id FROM minions WHERE name = ?), (SELECT id FROM villains WHERE name = ?));""");
+        statement.setString(1, minionName);
+        statement.setString(2, villainName);
+    }
 }
