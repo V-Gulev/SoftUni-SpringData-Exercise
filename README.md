@@ -1,1 +1,1 @@
-SpringData Exercise
+SoftUni SpringData Exercise
